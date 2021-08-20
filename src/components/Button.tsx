@@ -37,8 +37,9 @@ export const Button = styled.button<ButtonProps>`
   &:hover,
   &:active,
   &:focus {
-    ${(p) => `
-    !p.shadowless &&
+    ${(p) =>
+      !p.shadowless &&
+      `
       box-shadow: 0 2px 10px 0 var(--${p.variant}-shadow);
   `};
     text-decoration: none;
@@ -104,10 +105,7 @@ export const Button = styled.button<ButtonProps>`
       background-color: var(--${p.variant});
       color: ${p.theme.color.onBg};
       border-color: rgba(0,0,0,0.05);
-        ${
-          !p.shadowless &&
-          `box-shadow: 0 2px 10px 0 var(--${p.variant}-shadow);`
-        }
+        ${!p.shadowless && `box-shadow: 0 2px 10px 0 var(--${p.variant}-shadow);`}
       &:hover, &:active, &:focus {
         border-color: rgba(0,0,0,0.05);
         background-color: var(--${p.variant});

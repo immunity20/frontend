@@ -1,10 +1,11 @@
 import React from 'react';
-import { useRouter } from 'next/router';
-import { Button } from 'src/components/Button';
-import { useAsyncState } from 'src/hooks/useAsyncState';
+import Link from 'next/link';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
+import { useAsyncState } from 'src/hooks/useAsyncState';
 import { useTranslation } from 'next-i18next';
 import { Img } from 'src/components/Img';
+import { LinkButton } from 'src/components/LinkButton';
 
 const FlexfarmerDownloadLinkWrapper = styled.div`
   display: grid;
@@ -23,7 +24,7 @@ const FlexfarmerDownloadLinkWrapper = styled.div`
   }
 `;
 
-const FlexfarmerDownloadButton = styled(Button)`
+const FlexfarmerDownloadLinkButton = styled(LinkButton)`
   background: var(--bg-secondary);
   border-radius: 0;
   display: flex;
@@ -78,18 +79,17 @@ export const FlexfarmerDownloadLink: React.FC<{
 
   return (
     <FlexfarmerDownloadLinkWrapper>
-      <FlexfarmerDownloadButton
-        onClick={() => {
-          router.push(link);
-        }}
-        title={`${t('download')} FlexFarmer ${version} (${osName} ${info.name})`}
-      >
-        <Img
-          src={`https://static.flexpool.io/assets/os/${os}.png`}
-          alt={`${osName} logo`}
-        />
-        {osName} {info.name}
-      </FlexfarmerDownloadButton>
+      <Link href={link} passHref>
+        <FlexfarmerDownloadLinkButton
+          title={`${t('download')} FlexFarmer ${version} (${osName} ${info.name})`}
+        >
+          <Img
+            src={`https://static.flexpool.io/assets/os/${os}.png`}
+            alt={`${osName} logo`}
+          />
+          {osName} {info.name}
+        </FlexfarmerDownloadLinkButton>
+      </Link>
       <FlexfarmerDownloadInfoBox>
         <div>
           Version {version} <span style={{ color: 'var(--text-tertiary)' }}>|</span> {os}/
